@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee List</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('images/bg.png') no-repeat center center;
+      background-size: cover;
+      min-height: 100vh;
+    }
+    .header {
+      background-color: #002b5c;
+      text-align: center;
+      padding: 10px;
+    }
+    .header-inner img {
+      height: 80px;
+    }
+    .top-nav {
+      background-color:#002b5c;
+      text-align: center;
+    }
+    .top-nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 10px 0;
+    }
+    .top-nav li a {
+      color: white;
+      font-size: 18px;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background-color: #002b5c;
+    }
+    .top-nav li a:hover {
+      background-color: #001f3f;
+    }
+    h1 {
+      text-align: center;
+      color: #002b5c;
+      margin: 30px 0 10px;
+    }
+    .search-box {
+      max-width: 400px;
+      margin: 0 auto 30px;
+      display: flex;
+      justify-content: center;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #002b5c;
+      border-radius: 6px;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .employee-table-container {
+      max-width: 1000px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+    th, td {
+      padding: 14px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+    th { background-color: #002b5c; color: #fff; }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+    tr:hover { background-color: #e0f7ff; transition: 0.3s; }
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      animation: fadeIn 0.5s ease;
+    }
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .modal-content button {
+      padding: 10px 20px;
+      background: #002b5c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .modal-content button:hover { background: #004080; }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 10px;
+    }
+    .pagination button {
+      padding: 6px 12px;
+      background: #002b5c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .pagination button:hover { background: #004080; }
+    .message-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 15px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      z-index: 9999;
+      display: none;
+      color: white;
+      animation: slideIn 0.5s ease forwards;
+    }
+    .message-success { background-color: #4caf50; }
+    .message-error { background-color: #f44336; }
+    .main-footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+    button.edit-btn, button.delete-btn {
+      background-color: #002b5c;
+      color: white;
+      height: 36px;
+      border-radius: 6px;
+      padding: 6px 12px;
+      text-align: center;
+      border: none;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+	#sort{
+		  background-color: #002b5c;
+		  color: white;
+		  height: 50px;
+		  border-radius: 6px;
+		  padding: 6px 12px;
+		  text-align: center;
+		  border: none;
+		
+	}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <img src="logo.jpg" alt="Vedantra Technologies Logo">
+    </div>
+  </header>
+
+  <nav class="top-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="employees.html">Employees</a></li>
+      <li><a href="#" onclick="showModal()">Add New Employee</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <h1>Employee Management</h1>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search employee...">
+  </div>
+
+  <div class="employee-table-container">
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="employeeTableBody"></tbody>
+    </table>
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="employeeModal">
+    <div class="modal-content">
+      <h3 id="modalTitle">Add Employee</h3>
+      <input type="text" id="empName" placeholder="Name">
+      <input type="email" id="empEmail" placeholder="Email">
+      <input type="text" id="empRole" placeholder="Role">
+      <button onclick="submitEmployee()">Submit</button>
+    </div>
+  </div>
+  <div style="text-align:center; margin-bottom: 20px;">
+    <button id="sort"onclick="loadSortedEmployees()">Sort Employees</button>
+  </div>
+
+  <div id="messageBox" class="message-box"></div>
+
+  <footer class="main-footer">
+    <p>&copy; 2025 Vedantra Technologies. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let isUpdate = false, updateId = null, allEmployees = [], currentPage = 1, perPage = 5;
+
+    function showMessage(msg, type = 'success') {
+      const box = document.getElementById('messageBox');
+      box.className = 'message-box message-' + type;
+      box.innerText = msg;
+      box.style.display = 'block';
+      setTimeout(() => box.style.display = 'none', 3000);
+    }
+
+    function showModal(emp = null) {
+      const modal = document.getElementById('employeeModal');
+      modal.style.display = 'flex';
+      if (emp) {
+        isUpdate = true;
+        updateId = emp.id;
+        document.getElementById('empName').value = emp.name;
+        document.getElementById('empEmail').value = emp.email;
+        document.getElementById('empRole').value = emp.role;
+        document.getElementById('modalTitle').innerText = 'Update Employee';
+      } else {
+        isUpdate = false;
+        updateId = null;
+        document.getElementById('empName').value = '';
+        document.getElementById('empEmail').value = '';
+        document.getElementById('empRole').value = '';
+        document.getElementById('modalTitle').innerText = 'Add Employee';
+      }
+    }
+
+    window.onclick = e => {
+      const modal = document.getElementById('employeeModal');
+      if (e.target === modal) modal.style.display = 'none';
+    }
+
+    function submitEmployee() {
+      const name = document.getElementById('empName').value.trim();
+      const email = document.getElementById('empEmail').value.trim();
+      const role = document.getElementById('empRole').value.trim();
+
+      if (!name || !email || !role) return showMessage('All fields are required', 'error');
+
+      const url = isUpdate ? `/api/employees/${updateId}` : '/api/employees';
+      const method = isUpdate ? 'PUT' : 'POST';
+
+      fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, role })
+      })
+      .then(res => res.json())
+      .then(() => {
+        showMessage(isUpdate ? 'Employee updated' : 'Employee added', 'success');
+        document.getElementById('employeeModal').style.display = 'none';
+        loadEmployees();
+      })
+      .catch(() => showMessage('Error occurred', 'error'));
+    }
+
+    function deleteEmployee(id) {
+      if (!confirm('Delete this employee?')) return;
+      fetch(`/api/employees/${id}`, { method: 'DELETE' })
+        .then(() => {
+          showMessage('Employee deleted', 'error');
+          loadEmployees();
+        })
+        .catch(() => showMessage('Delete failed', 'error'));
+    }
+
+    function loadEmployees() {
+      fetch('/api/employees')  // ✅ Corrected here
+        .then(res => res.json())
+        .then(data => {
+          allEmployees = data;
+          renderTable();
+        })
+        .catch(() => showMessage('Failed to load employees', 'error'));
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('employeeTableBody');
+      const paginated = filterEmployees().slice((currentPage-1)*perPage, currentPage*perPage);
+      tbody.innerHTML = paginated.map(emp => `
+        <tr>
+          <td>${emp.id}</td><td>${emp.name}</td><td>${emp.email}</td><td>${emp.role}</td>
+          <td>
+            <button class="edit-btn" onclick='showModal(${JSON.stringify(emp)})'>Edit</button>
+            <button class="delete-btn" onclick='deleteEmployee(${emp.id})'>Delete</button>
+          </td>
+        </tr>
+      `).join('');
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const totalPages = Math.ceil(filterEmployees().length / perPage);
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+      for (let i = 1; i <= totalPages; i++) {
+        pagination.innerHTML += `<button onclick='goToPage(${i})'>${i}</button>`;
+      }
+    }
+
+    function goToPage(page) {
+      currentPage = page;
+      renderTable();
+    }
+
+    function filterEmployees() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      return allEmployees.filter(e =>
+        e.name.toLowerCase().includes(query) ||
+        e.email.toLowerCase().includes(query) ||
+        e.role.toLowerCase().includes(query)
+      );
+    }
+
+    document.getElementById('searchInput').addEventListener('input', () => {
+      currentPage = 1;
+      renderTable();
+    });
+
+    window.onload = loadEmployees;
+	function loadSortedEmployees() {
+	  fetch('/api/employees/sorted')
+	    .then(res => res.json())
+	    .then(data => {
+	      allEmployees = data;
+	      currentPage = 1;
+	      renderTable();
+	      showMessage('Sorted list loaded', 'success');
+	    })
+	    .catch(() => showMessage('Could not load sorted list', 'error'));
+	}
+
+  </script>
+</body>
+</html>

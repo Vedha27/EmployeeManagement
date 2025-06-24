@@ -1,0 +1,170 @@
+* { margin: 0; padding: 0; box-sizing: border-box;
+ }
+
+   body {
+     font-family: 'Segoe UI', sans-serif;
+     background:  url('ig.png') no-repeat center center;
+     background-size: cover;
+     min-height: 100vh;
+   }
+   .header {
+     background-color: #002b5c;
+     text-align: center;
+     padding: 10px;
+   }
+   .header-inner img {
+     height: 80px;
+   }
+   .top-nav {
+     background-color:#002b5c;
+     text-align: center;
+   }
+   .top-nav ul {
+     list-style: none;
+     display: flex;
+     justify-content: center;
+     gap: 30px;
+     padding: 10px 0;
+   }
+   .top-nav li a {
+     color: white;
+     font-size: 18px;
+  font-weight: 800;
+     text-decoration: none;
+     padding: 8px 16px;
+     border-radius: 6px;
+     background-color: #002b5c;
+   }
+   .top-nav li a:hover {
+     background-color: #001f3f;
+   }
+   
+   /* about.css */
+
+   .animated-banner {
+     text-align: center;
+     margin-top: 20px;
+     animation: fadeInBanner 1.8s ease-in-out forwards;
+   }
+
+   .svg-banner {
+     max-width: 90%;
+     height: auto;
+   }
+
+   .animated-intro {
+     font-size: 20px;
+     text-align: center;
+     color: #fff;
+     animation: fadeInText 2s ease-in-out forwards;
+     max-width: 800px;
+     margin: 0 auto 30px;
+     line-height: 1.6;
+   }
+
+   .section-title {
+     font-size: 36px;
+     color: #ffffff;
+     text-align: center;
+     margin: 40px 0 20px;
+     position: relative;
+   }
+
+   .section-title::after {
+     content: '';
+     width: 80px;
+     height: 4px;
+     background: #00c3ff;
+     position: absolute;
+     bottom: -10px;
+     left: 50%;
+     transform: translateX(-50%);
+   }
+
+   .about-section, .counter-section {
+     
+     padding: 60px 20px;
+   }
+
+   .info-cards {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 30px;
+     justify-content: center;
+     margin-top: 40px;
+	 color:#002b5c;
+   }
+
+   .info-card{
+     background: white;
+     backdrop-filter: blur(14px);
+     border-radius: 16px;
+     padding: 30px 20px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+     color: #002b5c;
+     width: 280px;
+     text-align: center;
+     transform: translateY(60px);
+     opacity: 0;
+     border: 1px solid rgba(255, 255, 255, 0.2);
+     transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.5s;
+   }
+
+   .info-card.fade-up-visible {
+     transform: translateY(0);
+     opacity: 1;
+     transition: all 0.8s ease-in-out;
+	 color:#002b5c;
+   }
+
+   .info-card.fade-up>h3
+   {
+	color:#002b5c;
+   }
+   .info-card:hover {
+     transform: translateY(-10px) scale(1.03);
+     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+     background: white;
+   }
+
+   .info-card h3 {
+     font-size: 24px;
+     margin-bottom: 10px;
+     color: #ffffff;
+   }
+
+   .info-card p {
+     font-size: 16px;
+     line-height: 1.6;
+   }
+
+   .counter-section .info-card h3 {
+     font-size: 42px;
+     color: #00ffff;
+   }
+
+   @keyframes fadeInText {
+     from { opacity: 0; transform: translateY(20px); }
+     to { opacity: 1; transform: translateY(0); }
+   }
+
+   @keyframes fadeInBanner {
+     from { opacity: 0; transform: translateY(-40px); }
+     to { opacity: 1; transform: translateY(0); }
+   }
+
+   @media (max-width: 768px) {
+     .info-cards {
+       flex-direction: column;
+       align-items: center;
+     }
+     .section-title {
+       font-size: 28px;
+     }
+   }
+.main-footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
