@@ -162,3 +162,78 @@ button:hover {
     align-items: center;
   }
 }
+/* === Additional Responsive Enhancements === */
+
+@media (max-width: 600px) {
+  .header-inner img {
+    height: 60px;
+  }
+
+  .top-nav ul {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .top-nav li a {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .info-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .contact-section {
+    padding: 20px;
+  }
+
+  .section-title, .info-title, .touch-title {
+    font-size: 24px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .main-footer {
+    font-size: 14px;
+    padding: 15px;
+  }
+
+  .touch-description {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+}
+
+/* Ensure no horizontal overflow */
+body {
+  overflow-x: hidden;
+}
+
+/* Center form on ultra-small devices */
+@media (max-width: 400px) {
+  .contact-section {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .info-card {
+    max-width: 100%;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
