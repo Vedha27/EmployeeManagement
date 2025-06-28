@@ -179,6 +179,82 @@
 		  border: none;
 		
 	}
+	  /* === Responsive Enhancements === */
+
+/* Make table horizontally scrollable on small screens */
+@media (max-width: 768px) {
+  .employee-table-container {
+    overflow-x: auto;
+    padding: 15px;
+  }
+
+  table {
+    min-width: 600px;
+    width: 100%;
+  }
+}
+
+/* Wrap long content in table cells */
+td, th {
+  word-wrap: break-word;
+  white-space: normal;
+  max-width: 200px;
+}
+
+/* Adjust buttons and search box for small screens */
+@media (max-width: 600px) {
+  .search-box {
+    padding: 0 10px;
+  }
+
+  .search-box input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .modal-content input {
+    font-size: 14px;
+  }
+
+  button.edit-btn, button.delete-btn, #sort {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+}
+
+/* Navigation stacks on small screens */
+@media (max-width: 768px) {
+  .top-nav ul {
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 0;
+  }
+
+  .top-nav li a {
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px 18px;
+  }
+}
+
+/* Header image scaling */
+@media (max-width: 480px) {
+  .header-inner img {
+    height: 60px;
+  }
+}
+
+/* Modal width fix on extra-small devices */
+@media (max-width: 400px) {
+  .modal-content {
+    width: 95%;
+  }
+}
+
   </style>
 </head>
 <body>
